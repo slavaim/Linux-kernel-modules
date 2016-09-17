@@ -1,5 +1,4 @@
 obj-m += readfile.o
-#readfileX-objs := readfile.o
 
 #KERNELDIR ?= /lib/modules/$(shell uname -r)/build
 
