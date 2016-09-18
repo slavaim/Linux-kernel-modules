@@ -1,4 +1,4 @@
-A multiple source file example.  To heck that all files have been compiled and linked use nm command to verify module elf symbol tables.
+A multiple source files example.  To heck that all files have been compiled and linked use nm command to verify module elf symbol tables.
 
 $ nm multifile.ko 
 00000000 T cleanup_module
