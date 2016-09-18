@@ -28,23 +28,23 @@ void list_from_task(struct task_struct *task)
 {
 	// tasklist_lock is not exported anymore, use RCU as p->tasks is updated wth list_add_tail_rcu(), see copy_process(),
 	// you can use list_for_each_entry_rcu() instead the explicit RCU list traversing code below
-    rcu_read_lock();
-    {
-    	struct task_struct* p = task;
+	rcu_read_lock();
+	{
+		struct task_struct* p = task;
 
-    	do
-    	{
-    		struct list_head*  next;
-    		long               state = p->state; // the value is volatile and will be accessed twice, make a copy for consistency
+		do
+		{
+			struct list_head*  next;
+			long               state = p->state; // the value is volatile and will be accessed twice, make a copy for consistency
 
-    		printk(KERN_INFO "task: %s, pid: [%d], state: %li(%s)\n", p->comm, p->pid, state, state_to_string(state));
+			printk(KERN_INFO "task: %s, pid: [%d], state: %li(%s)\n", p->comm, p->pid, state, state_to_string(state));
 
-    		next = rcu_dereference(p->tasks.next);
-    		p = list_entry(next, struct task_struct, tasks);
-    	}
-    	while (p != task);
-    }
-    rcu_read_unlock();
+			next = rcu_dereference(p->tasks.next);
+			p = list_entry(next, struct task_struct, tasks);
+		}
+		while (p != task);
+	}
+	rcu_read_unlock();
 }
 
 void list_tasks(void)
