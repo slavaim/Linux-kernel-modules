@@ -26,7 +26,7 @@ const char* state_to_string(long state)
 
 void list_from_task(struct task_struct *task)
 {
-    // tasklist_lock is not exported anymore, use RCU as the p->tasks is updated wth list_add_tail_rcu(), see copy_process(),
+	// tasklist_lock is not exported anymore, use RCU as p->tasks is updated wth list_add_tail_rcu(), see copy_process(),
 	// you can use list_for_each_entry_rcu() instead the explicit RCU list traversing code below
     rcu_read_lock();
     {
