@@ -35,7 +35,7 @@ int kthreadf(void *data)
 		set_current_state(TASK_INTERRUPTIBLE);
 		// call the scheduler to release a CPU
 		schedule();
-		// the thread has been woken up
+		// the thread has been woken up, the thread is woken up in TASK_RUNNING state
 		printk(KERN_INFO "thread has been woken up in %s\n", state_to_string(current->state));
 	}
 
